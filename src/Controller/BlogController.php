@@ -25,4 +25,13 @@ class BlogController extends AbstractController
             'owner' => 'Adeline',
         ]);
     }
+
+    /**
+     * @Route("/blog/show/{article<[a-z-0-9]+>}", name="blog_show")
+     */
+    public function show($article = "Article Sans Titre")
+    {
+        $titre = ucwords(implode(' ',explode('-',$article)));
+        return $this->render('blog/show.html.twig',['titre' => $titre]);
+    }
 }
