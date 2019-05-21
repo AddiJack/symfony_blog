@@ -12,6 +12,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -113,17 +114,12 @@ class BlogController extends AbstractController
     /**
      * Show all row from article's entity
      *
-     * @Route("/blog/category/{category}", name="show_category")
+     * @Route("/blog/category/{name}", name="show_category")
      * @return Response A response instance
      */
 
-     public function showByCategory(string $category)
+     public function showByCategory(Category $category)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $category = $em->getRepository(Category::class)
-            ->findOneByName($category);
-
         $article = $category->getArticles();
 
         return $this->render(
