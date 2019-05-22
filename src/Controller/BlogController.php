@@ -9,13 +9,16 @@
 // src/Controller/BlogController.php
 namespace App\Controller;
 
-
+use App\Form\CategoryType;
+use App\Form\ArticleSearchType;
 use App\Entity\Article;
 use App\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class BlogController extends AbstractController
 {
@@ -23,7 +26,7 @@ class BlogController extends AbstractController
     /**
      * Show all row from article's entity
      *
-     * @Route("/", name="app_index")
+     * @Route("/blog/", name="app_index")
      * @return Response A response instance
      */
     public function index(): Response
@@ -38,9 +41,17 @@ class BlogController extends AbstractController
             );
         }
 
+        $form = $this->createForm(
+            ArticleSearchType::class,
+            null,
+            ['method' => Request::METHOD_GET]
+        );
+
         return $this->render(
-            'blog/index.html.twig',
-            ['articles' => $articles]
+            'blog/index.html.twig', [
+                'articles' => $articles,
+                'form' => $form->createView(),
+            ]
         );
     }
 
@@ -61,10 +72,7 @@ class BlogController extends AbstractController
                 ->createNotFoundException('No slug has been sent to find an article in article\'s table.');
         }
 
-        $slug = preg_replace(
-            '/-/',
-            ' ', ucwords(trim(strip_tags($slug)), "-")
-        );
+        $slug = preg_replace('/-/', ' ', ucwords(trim(strip_tags($slug)), "-"));
 
         $article = $this->getDoctrine()
             ->getRepository(Article::class)

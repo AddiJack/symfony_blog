@@ -5,6 +5,13 @@
 {% block title %}All articles{% endblock %}
 
 {% block body %}
+    <form>
+    {{ form_start(form) }}
+    {{ form_row(form.searchField) }}
+    <button type="submit" name="btnSearch">Rechercher</button>
+    {{ form_end(form) }}
+    </form>
+
     <h1>All articles from article s table : </h1>
     {% for article in articles %}
         <div>
