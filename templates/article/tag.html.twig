@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tag{% endblock %}
+
+{% block body %}
+    <strong>Tags : {{ tag }}</strong>
+    <ul>
+        {% for tag in article %}
+            <li>{{ loop.index }} / {{tag}} </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -13,6 +13,7 @@ use App\Form\CategoryType;
 use App\Form\ArticleSearchType;
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Tag;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +67,7 @@ class BlogController extends AbstractController
      *     name="blog_show")
      *  @return Response A response instance
      */
-    public function show(?string $slug) : Response
+    public function showArticle(?string $slug) : Response
     {
         if (!$slug) {
             throw $this
@@ -139,4 +140,19 @@ class BlogController extends AbstractController
         ]
         );
     }
+
+    /**
+     * @Route("/article/tag/{name}", name="show_tag")
+     * * @return Response A response instance
+     */
+
+    public function showTag(Tag $tag): Response
+    {
+        $article = $tag->getArticles();
+        return $this->render('article/tag.html.twig', [
+            'tag' => $tag,
+            'article' => $article
+        ]);
+    }
+
 }
