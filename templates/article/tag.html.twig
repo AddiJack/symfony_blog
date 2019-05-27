@@ -6,7 +6,7 @@
     <strong>Tags : {{ tag }}</strong>
     <ul>
         {% for tag in article %}
-            <li>{{ loop.index }} / {{tag}} </li>
+            <li>{{ loop.index }} / {{tag.title}} </li>
         {% endfor %}
     </ul>
 {% endblock %}
