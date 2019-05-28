@@ -20,6 +20,7 @@ class ArticleType extends AbstractType
         $builder->add('tags', EntityType::class, [
             'class' => Tag::class,
             'choice_label' => 'name',
+            'by_reference' => False,
             'expanded' => True,
             'multiple' => True,
         ]);
