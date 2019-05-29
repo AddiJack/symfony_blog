@@ -28,6 +28,13 @@
                     {% endfor %}
                 </td>
                 <td>
+                    {% if article.category %}
+                        <li>{{ article.category.name }} </li>
+                    {% else %}
+                        <li>No category for this article</li>
+                    {% endif %}
+                </td>
+                <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
                 </td>
