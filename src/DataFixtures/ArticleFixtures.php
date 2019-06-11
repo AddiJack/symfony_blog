@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Repository\ArticleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use  Faker;
+use Faker;
 use App\Service\Slugify;
 
 class ArticleFixtures extends Fixture implements DependentFixtureInterface

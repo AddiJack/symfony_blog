@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h2>Nouvel Article disponible</h2>
+    <p> {{ article.title }} <a href="{{ url('article_show', {'slug': article.title}) }}">lien</a> </p>
+{% endblock %}
